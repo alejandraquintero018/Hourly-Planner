@@ -1,6 +1,5 @@
 
 var dayEl = $('#currentDay');
-var hourEl = $('#hour'); 
 var saveBtn = $('#save');
 var timeblockEL = $('timeblock'); 
 
@@ -11,14 +10,7 @@ dayEl.text(dayjs().format('dddd, MMMM D'));
 //calling my function 
 day();
 
-//populates the hour of the day into each block 
-var hour = function() { 
-    hourEl.text(dayjs().format('hA'));
-};
-//calling my function 
-hour();
-
-for (let i = 0; i < 25; i++) {
-   var hours = document.createElement(timeblockEL);  
-}; 
-    
+$('.saveBtn').on('click', function(event){
+    console.log($(this).parent());
+    console.log($(this).siblings('textarea').val()); 
+}); 
