@@ -1,53 +1,59 @@
 
 var saveBtn = $('#saveBtn');
-var descriptionEL = $('#description'); 
+var descriptionEL = $('#description');
+var timblockEl = $('.time-block');
+
+$(this).children('description').addClass('past');
 
 $(document).ready(function () {
 
     //This gives me the day at the top of my Calendar 
-    var day = function () {
+    let day = function () {
         $('#currentDay').text(dayjs().format('dddd, MMMM D'));
     };
     //calling my function 
     day();
-
     //where I have my save button save things into local storage
     $('.saveBtn').on('click', function (event) {
         //console.log($(this).parent());
         let plan = ($(this).siblings('textarea').val());
-        let toString = JSON.stringify(plan);
-        localStorage.setItem('Planned', toString); 
-        //let getPlan = localStorage.getItem('Planned'); 
-        //$(this).siblings('textarea').append
-
+        localStorage.setItem('Planned', JSON.stringify(plan));
+        let getPlan = localStorage.getItem(plan);
+        ($(this).siblings('textarea')).textContent(getPlan);
     });
 
+
     //function to compare value of the time and the value of the current hour 
-
-    var timecheck = function () {
-        $('.time-block').each(function () {
-            var blockHour = $(this).children('.hour').text();
-            var converted = JSON.stringify(blockHour);
-            let currentHour = dayjs().format('ha').toString();
-            if (converted === '3pm') {   //this comparison is where the bug is
-                $(this).children('description').addClass('present');
-            } if (currentHour != '2pm') {
-                $(this).children('.description').addClass('future');
-            }
-            else {
-
-            }
-            console.log(currentHour);
-            console.log(blockHour);
+    function timecheck() {
+        $(timblockEl).each(function () {
+            let blockHour = $(this).attr('id');
+            let converted = parseInt(blockHour);
+            let currentHour = dayjs().hour();
+            for (i = 0; i < timblockEl.length; i++) {
+                if (currentHour > converted) {   //this comparison is where the bug is
+                    $(this).children('.description').addClass('past');
+                    if (currentHour == converted) {
+                        $(this).children('.description').addClass('present');
+                    }
+                } else {
+                    $(this).children('.description').addClass('future');
+                };
+            };
         });
-    }
-    //calling my function
-    timecheck();
+    };
+    //let timeInterval = setInterval(function () {
+    //if (!currentHour) {
+    //$(this).children('description').addClass('past');
+    // } else {
+    // timecheck();
+    // }
+    //}, 3600000)
+    //clearInterval(timeInterval);
+    setInterval(timecheck, 3600);
+
 });
 
+//calling my function
 
-//setInterval()
-
-//local storage of the text area 
 
 
