@@ -16,14 +16,17 @@
 
 To use, click on the link below and write in text area what you want to plan out for your day, the color of the boxes will change as the hour changes as shown in the screenshot. In order to save a task in the calendar, add text and the text and click the blue button adjacent to the textarea and the text will remain there until a new task is added. The day of the week as well as day of the month will automatically update. 
 
+https://alejandraquintero018.github.io/Hourly-Planner/
+
+
 
 ## Usage
 
 
-    ```md
+md
 ![alt text](assets/screenshot1.png)
 
-```md
+md
 ![alt text](assets/screenshot2.png)
 
 ## Credits
